@@ -59,6 +59,9 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
     res.send("genipus car center server is running")
 });
+app.get('/hero', (req, res) => {
+    res.send("hero")
+});
 app.listen(port, () => {
     console.log("listing to port", port);
 })
