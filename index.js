@@ -21,6 +21,8 @@ async function run() {
         await client.connect();
         const serviceCollection = client.db('genious-car-senter').collection('services');
 
+        const orderCollection = client.db('genious-car-senter').collection('order');
+
         // for load the data
         app.get('/service', async (req, res) => {
             const query = {};
@@ -35,6 +37,14 @@ async function run() {
             const query = { _id: ObjectId };
             const service = await serviceCollection.findOne(query);
             res.send(service);
+        });
+
+
+        // order collectio api
+        app.post('/order', async (req, res) => {
+            const newOrder = req.body;
+            const result = await orderCollection.insertOne(newOrder);
+            res.send(result)
         })
     }
     finally {
